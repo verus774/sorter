@@ -1,7 +1,7 @@
 class Sorter {
   constructor() {
     this.items = [];
-    this.compareFunction = null;
+    this.compareFunction = (a, b) => a - b;
   }
 
   add(element) {
@@ -22,10 +22,13 @@ class Sorter {
 
   sort(indices) {
     let items = [];
+
     for(let index of indices) {
         items.push(this.items[index]);
     }
-    this.items = items.sort(this.compareFunction);
+
+    items = items.sort(this.compareFunction);
+    indices.sort().forEach((item, i) => this.items[item] = items[i]);
   }
 
   setComparator(compareFunction) {
